@@ -3,6 +3,7 @@ package io.github.mellamopablo.signinwithgoogletest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 
 import com.google.android.gms.auth.api.Auth
@@ -11,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.GoogleApiClient
+import io.github.mellamopablo.signinwithgoogletest.helpers.ApiClient
 
 class MainActivity : Activity() {
 
@@ -25,6 +27,7 @@ class MainActivity : Activity() {
         gso = GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken(SERVER_CLIENT_ID)
                 .build()
 
         gApiClient = GoogleApiClient
@@ -58,10 +61,17 @@ class MainActivity : Activity() {
             account = result.signInAccount
             addLineToLog("Account name: ${account!!.displayName}")
             addLineToLog("Email: ${account!!.email}")
+            //addLineToLog("Id Token: ${account!!.idToken}")
             addLineToLog("Scopes:")
             account!!.grantedScopes.forEach { scope -> addLineToLog(scope.toString()) }
         } else {
             addLineToLog("Log in failure")
+        }
+
+        ApiClient.authenticate("hola").onSuccess { data ->
+            Log.d("REQUEST", "Url: $data")
+        } .onFailure { error ->
+            Log.e("REQUEST", error.localizedMessage ?: error.toString())
         }
     }
 
@@ -87,5 +97,7 @@ class MainActivity : Activity() {
 
     companion object {
         private val RC_SIGN_IN = 322
+        private val SERVER_CLIENT_ID =
+                "922325936396-gb9hvho675353pr218mbjvtvbuvnq649.apps.googleusercontent.com"
     }
 }
