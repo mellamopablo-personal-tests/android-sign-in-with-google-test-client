@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "922325936396",
+    "project_id": "carbon-sunup-162415"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922325936396:android:7f932469db4600af",
+        "android_client_info": {
+          "package_name": "io.github.mellamopablo.signinwithgoogletest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922325936396-nir0hg92lfh4mjaitp4rl64g05cfn3ee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.mellamopablo.signinwithgoogletest",
+            "certificate_hash": "397a515c9720281c5496f166a26a49e45b63d880"
+          }
+        },
+        {
+          "client_id": "922325936396-gb9hvho675353pr218mbjvtvbuvnq649.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYAcTddC_0kgkwqZ3bYNWKyTB4iFQWwUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
