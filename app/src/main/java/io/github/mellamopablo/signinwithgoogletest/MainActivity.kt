@@ -77,7 +77,7 @@ class MainActivity : Activity() {
 
     private fun addLineToLog(line: String) {
         val log = findViewById(R.id.log_text) as TextView
-        log.text = "${log.text}\n${line}"
+        log.text = "${log.text}\n$line"
     }
 
     private fun clearLog() {
