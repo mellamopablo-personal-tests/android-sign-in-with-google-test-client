@@ -27,7 +27,7 @@ abstract class ApiClient { companion object {
 
                     is Result.Failure -> {
                         Log.d("REQUEST", "Failure $result")
-                        apiResult.onFailureCallback(result.error)
+                        apiResult.error = result.error
                     }
                 }
             }

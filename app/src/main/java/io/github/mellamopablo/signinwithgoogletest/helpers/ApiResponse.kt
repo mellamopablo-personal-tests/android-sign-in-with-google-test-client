@@ -6,17 +6,22 @@ import org.json.JSONObject
 
 class ApiResponse {
 
-    private var onSuccessCallback: ((JSONObject) -> Unit) = {}
-    public /* TODO something like package private ?*/
-        var onFailureCallback: ((FuelError) -> Unit) = { error ->
-            Log.e("ApiResponse", "Unhandled error!")
-            Log.e("ApiResponse", error.toString())
-        }
+    private var onSuccessCallback: (JSONObject) -> Unit = {}
+    private var onFailureCallback: (FuelError) -> Unit = { error ->
+        Log.e("ApiResponse", "Unhandled error!")
+        Log.e("ApiResponse", error.toString())
+    }
 
     var data: JSONObject? = null
         set(value) {
             field = value
             onSuccessCallback(this.data as JSONObject)
+        }
+
+    var error: FuelError? = null
+        set(value) {
+            field = value
+            onFailureCallback(this.error as FuelError)
         }
 
     public fun then(callback: (JSONObject) -> Unit): ApiResponse {
