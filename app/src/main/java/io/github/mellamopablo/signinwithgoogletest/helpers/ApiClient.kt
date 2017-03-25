@@ -7,7 +7,7 @@ import org.json.JSONObject
 
 abstract class ApiClient { companion object {
 
-    val BASE_URL = "localhost"
+    val BASE_URL = "http://192.168.1.12:3000"
 
     fun authenticate(idToken: String): ApiResponse {
         val apiResult = ApiResponse()
@@ -15,13 +15,13 @@ abstract class ApiClient { companion object {
         val headers = HashMap<String, String>()
         headers.put("Content-Type", "application/json")
 
-        Fuel.post(/*"$BASE_URL/auth"*/ "http://httpbin.org/post")
+        Fuel.post("$BASE_URL/login")
             .header(headers)
             .body(JSONObject().put("idToken", idToken).toString())
             .responseString { request, response, result ->
                 when (result) {
                     is Result.Success -> {
-                        val json = JSONObject(result.get())
+                        val json = JSONObject(if (result.get() == "") "{}" else result.get())
                         apiResult.data = json
                     }
 

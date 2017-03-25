@@ -19,12 +19,12 @@ class ApiResponse {
             onSuccessCallback(this.data as JSONObject)
         }
 
-    public fun onSuccess(callback: (JSONObject) -> Unit): ApiResponse {
+    public fun then(callback: (JSONObject) -> Unit): ApiResponse {
         this.onSuccessCallback = callback
         return this
     }
 
-    public fun onFailure(callback: (FuelError) -> Unit): ApiResponse {
+    public fun catch(callback: (FuelError) -> Unit): ApiResponse {
         this.onFailureCallback = callback
         return this
     }

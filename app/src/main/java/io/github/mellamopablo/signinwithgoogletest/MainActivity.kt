@@ -61,16 +61,17 @@ class MainActivity : Activity() {
             account = result.signInAccount
             addLineToLog("Account name: ${account!!.displayName}")
             addLineToLog("Email: ${account!!.email}")
-            //addLineToLog("Id Token: ${account!!.idToken}")
             addLineToLog("Scopes:")
             account!!.grantedScopes.forEach { scope -> addLineToLog(scope.toString()) }
         } else {
             addLineToLog("Log in failure")
         }
 
-        ApiClient.authenticate("hola").onSuccess { data ->
-            Log.d("REQUEST", "Url: $data")
-        } .onFailure { error ->
+        ApiClient.authenticate(account!!.idToken as String).then { data ->
+            addLineToLog("Backend authentication success")
+            Log.d("REQUEST", "Response: $data")
+        } .catch { error ->
+            addLineToLog("Backend authentication failure")
             Log.e("REQUEST", error.localizedMessage ?: error.toString())
         }
     }

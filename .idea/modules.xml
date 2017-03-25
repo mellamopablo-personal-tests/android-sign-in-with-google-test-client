@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SignInWithGoogleTest.iml" filepath="$PROJECT_DIR$/SignInWithGoogleTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-sign-in-with-google-test-client.iml" filepath="$PROJECT_DIR$/android-sign-in-with-google-test-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
