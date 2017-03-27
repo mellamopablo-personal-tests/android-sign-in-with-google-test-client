@@ -28,14 +28,13 @@
     <LinearLayout
         android:id="@+id/log_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/log_text"
+        <io.github.mellamopablo.signinwithgoogletest.components.LogView
+            android:id="@+id/log"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/not_signed_in"
-            android:textAlignment="center" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

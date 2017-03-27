@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -13,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.GoogleApiClient
 import io.github.mellamopablo.signinwithgoogletest.helpers.ApiClient
+import io.github.mellamopablo.signinwithgoogletest.components.LogView
 
 class MainActivity : Activity() {
 
@@ -53,26 +53,27 @@ class MainActivity : Activity() {
     }
 
     private fun handleSignInResult(result: GoogleSignInResult) {
-        clearLog()
+        val log = findViewById(R.id.log) as LogView
+        log.clear()
 
         if (result.isSuccess) {
-            addLineToLog("Log in success")
+            log.addLine("Log in success")
 
             account = result.signInAccount
-            addLineToLog("Account name: ${account!!.displayName}")
-            addLineToLog("Email: ${account!!.email}")
-            addLineToLog("Scopes:")
-            account!!.grantedScopes.forEach { scope -> addLineToLog(scope.toString()) }
-        } else {
-            addLineToLog("Log in failure")
-        }
+            log.addLine("Account name: ${account!!.displayName}")
+            log.addLine("Email: ${account!!.email}")
+            log.addLine("Scopes:")
+            account!!.grantedScopes.forEach { scope -> log.addLine(scope.toString()) }
 
-        ApiClient.authenticate(account!!.idToken as String).then { data ->
-            addLineToLog("Backend authentication success")
-            Log.d("REQUEST", "Response: $data")
-        } .catch { error ->
-            addLineToLog("Backend authentication failure")
-            Log.e("REQUEST", error.localizedMessage ?: error.toString())
+            ApiClient.authenticate(account!!.idToken as String).then { data ->
+                log.addLine("Backend authentication success")
+                Log.d("REQUEST", "Response: $data")
+            } .catch { error ->
+                log.addLine("Backend authentication failure")
+                Log.e("REQUEST", error.localizedMessage ?: error.toString())
+            }
+        } else {
+            log.addLine("Log in failure")
         }
     }
 
@@ -84,16 +85,6 @@ class MainActivity : Activity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-    }
-
-    private fun addLineToLog(line: String) {
-        val log = findViewById(R.id.log_text) as TextView
-        log.text = "${log.text}\n$line"
-    }
-
-    private fun clearLog() {
-        val log = findViewById(R.id.log_text) as TextView
-        log.text = ""
     }
 
     companion object {
